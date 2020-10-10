@@ -15,6 +15,9 @@ export default {
       todos: []
     }
   },
+  created() {
+    this.todos = JSON.parse(localStorage.getItem('todos')) || [];
+  },
   components: {
     'todo-form': TodoForm,
     'todo-list': TodoList
@@ -22,9 +25,11 @@ export default {
   methods: {
     addTodo(newTodo) {
       this.todos.push(newTodo);
+      localStorage.setItem('todos', JSON.stringify(this.todos));
     },
     deleteTodo(i) {
       this.todos.splice(i, 1);
+      localStorage.setItem('todos', JSON.stringify(this.todos));
     }
   }
 }
